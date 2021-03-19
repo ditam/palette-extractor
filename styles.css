@@ -6,3 +6,28 @@ canvas {
   background-color: white;
   border: 1px solid gray;
 }
+
+.color-label {
+  display: inline-block;
+  width: 150px;
+  padding: 0 5px;
+}
+
+.color-sample {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+
+.color-percent-container {
+  display: inline-block;
+  width: 300px;
+  height: 5px;
+}
+
+.color-percent-container > .color-percent-bar {
+  display: inline-block;
+  /* width set from JS */
+  height: 5px;
+  background-color: grey;
+}

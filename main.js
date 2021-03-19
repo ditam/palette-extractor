@@ -18,23 +18,16 @@ function showTopColors(counter) {
     const color = entries.pop();
     const percentOfTop = color[1] / top[1] * 100;
     const line = $('<div>');
-    const sample = $('<span>').css({
-      'display': 'inline-block',
-      'width': '25px',
-      'height': '25px',
+    const sample = $('<span>').addClass('color-sample').css({
       'background-color': 'rgb(' + color[0] + ')'
     });
     line.append(sample);
-    const label = $('<span>').text(`${color[1]} (${color[0]})`).css({
-      display: 'inline-block',
-      width: '150px',
-      padding: '0 5px'
-    });
+    const label = $('<span>').text(`${color[1]} (${color[0]})`).addClass('color-label')
     line.append(label);
 
     // percentage visualization
-    const percentBar = $('<span>').css({display: 'inline-block', width: '300px', height: '5px'});
-    const percentValue = $('<span>').css({display: 'inline-block', width: percentOfTop + '%', height: '5px', 'background-color': 'grey'});
+    const percentBar = $('<span>').addClass('color-percent-container');
+    const percentValue = $('<span>').addClass('color-percent-bar').css('width', percentOfTop + '%');
     percentValue.appendTo(percentBar);
     percentBar.appendTo(line);
 
