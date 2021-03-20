@@ -17,12 +17,12 @@ function showTopColors(counter) {
   for (let i = 1; i < 20; i++) {
     const color = entries.pop();
     const percentOfTop = color[1] / top[1] * 100;
-    const line = $('<div>');
+    const line = $('<div>').addClass('color-line');
     const sample = $('<span>').addClass('color-sample').css({
       'background-color': 'rgb(' + color[0] + ')'
     });
     line.append(sample);
-    const label = $('<span>').text(`${color[1]} (${color[0]})`).addClass('color-label')
+    const label = $('<span>').text(`rgb(${color[0]})`).addClass('color-label')
     line.append(label);
 
     // percentage visualization
