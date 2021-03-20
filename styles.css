@@ -61,6 +61,7 @@ body.empty #drop_zone .icon {
   height: 472px;
   padding: 4px 0;
   overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 #sidebar::-webkit-scrollbar {
