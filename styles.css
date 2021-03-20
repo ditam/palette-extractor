@@ -22,6 +22,10 @@ canvas {
   cursor: pointer;
 }
 
+body:not(.empty) #drop_zone {
+  border-color: transparent;
+}
+
 body:not(.empty) #drop_zone .icon {
   display: none;
 }
