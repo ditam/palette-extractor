@@ -22,6 +22,14 @@ canvas {
   cursor: pointer;
 }
 
+body:not(.empty) #drop_zone .icon {
+  display: none;
+}
+
+body.empty #drop_zone .icon {
+  display: block;
+}
+
 #drop_zone .icon {
   position: absolute;
   top: 37%;

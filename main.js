@@ -62,9 +62,9 @@ function drawImageFileToCanvas(file) {
   fileReader.addEventListener('load', (evt) => {
     const img = new Image();
     img.addEventListener('load', () => {
-      console.log('img loaded')
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       ctx.drawImage(img, 0, 0, WIDTH, HEIGHT);
+      $('body').removeClass('empty');
     });
     img.src = evt.target.result;
   });
