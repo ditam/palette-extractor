@@ -14,7 +14,8 @@ function showTopColors(counter) {
   const entries = Object.entries(counter);
   entries.sort((a,b) => { return a[1] - b[1]; }); // sort ascending
   const top = entries[entries.length -1];
-  for (let i = 1; i < 20; i++) {
+  for (let i = 1; i < 30; i++) {
+    if (entries.length === 0) return;
     const color = entries.pop();
     const percentOfTop = color[1] / top[1] * 100;
     const line = $('<div>').addClass('color-line');
@@ -65,6 +66,7 @@ function drawImageFileToCanvas(file) {
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       ctx.drawImage(img, 0, 0, WIDTH, HEIGHT);
       $('body').removeClass('empty');
+      $('#results').empty();
     });
     img.src = evt.target.result;
   });
