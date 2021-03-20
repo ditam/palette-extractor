@@ -1,6 +1,6 @@
 
-const WIDTH = 320;
-const HEIGHT = 200;
+const WIDTH = 640;
+const HEIGHT = 480;
 
 let ctx;
 
@@ -57,9 +57,7 @@ function processImageData() {
   showTopColors(colorCounter);
 }
 
-function readImage() {
-  if (!this.files || !this.files[0]) return;
-
+function drawImageFileToCanvas(file) {
   const fileReader = new FileReader();
   fileReader.addEventListener('load', (evt) => {
     const img = new Image();
@@ -70,7 +68,33 @@ function readImage() {
     });
     img.src = evt.target.result;
   });
-  fileReader.readAsDataURL(this.files[0]);
+  fileReader.readAsDataURL(file);
+}
+
+function dropHandler(event) {
+  // Prevent default behavior (Prevent file from being opened)
+  event.preventDefault();
+
+  // more jquery and drop hacks...
+  event.dataTransfer = event.originalEvent.dataTransfer;
+
+  let file = null;
+
+  if (event.dataTransfer.items) {
+    if (event.dataTransfer.items.length === 0) return;
+    if (event.dataTransfer.items[0].kind !== 'file') return;
+    file = event.dataTransfer.items[0].getAsFile();
+  } else {
+    if (event.dataTransfer.files.length === 0) return;
+    file = event.dataTransfer.files[0];
+  }
+
+  drawImageFileToCanvas(file);
+}
+
+function handleImageSelect() {
+  if (!this.files || !this.files[0]) return;
+  drawImageFileToCanvas(this.files[0]);
 }
 
 $(document).ready(function() {
@@ -80,6 +104,14 @@ $(document).ready(function() {
 
   ctx = canvas.getContext('2d');
 
-  $('#fileInput').on('change', readImage);
+  $('#fileInput').on('change', handleImageSelect);
   $('#runButton').on('click', processImageData);
+
+  const dropZone = $('#drop_zone');
+  dropZone.on('dragenter', () => { console.log('ENTER'); });
+  dropZone.on('dragleave', () => { console.log('LEAVE'); });
+  // you need to cancel dragover to make drag fire... https://stackoverflow.com/q/19223352/4083826
+  dropZone.on('dragover', false);
+  dropZone.on('drop', dropHandler);
+  dropZone.on('click', () => { $('#fileInput').trigger('click'); });
 });

@@ -1,10 +1,54 @@
 body {
-  background-color: #eee;
+  background: linear-gradient(45deg, #c8f2ff, #294877);
 }
 
 canvas {
-  background-color: white;
-  border: 1px solid gray;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+#drop_zone {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 640px;
+  height: 480px;
+  border: 4px dashed #80808036;
+}
+
+#drop_zone:hover {
+  border-color: #80808070;
+  cursor: pointer;
+}
+
+#drop_zone .icon {
+  position: absolute;
+  top: 37%;
+  left: 45%;
+}
+
+#drop_zone .icon path {
+  fill: #8cb1cb;
+  stroke: #8cb1cb;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-width: 8px;
+}
+
+#drop_zone:hover .icon path {
+  fill: #7499b8;
+  stroke: #7499b8;
+}
+
+#sidebar {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 .color-label {

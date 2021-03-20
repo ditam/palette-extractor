@@ -9,10 +9,18 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <input type="file" id="fileInput" accept="image/*" />
-  <button id="runButton">Run</button>
   <canvas id="main-canvas"></canvas>
-  <div id="results"></div>
+  <div id="drop_zone">
+    <svg class="icon">
+      <path d="M 48 4 L 86 74 L 56 74 L 56 100 L 39 100 L 39 74 L 5 74 z" />
+      <path d="M 5 120 L 86 120"></path>
+    </svg>
+  </div>
+  <div id="sidebar">
+    <input type="file" id="fileInput" accept="image/*" />
+    <button id="runButton">Run</button>
+    <div id="results"></div>
+  </div>
 
   <script src="ext/jquery.js"></script>
   <script src="main.js"></script>
