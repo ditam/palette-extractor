@@ -44,7 +44,7 @@ function showTopColors(counter) {
     // action icons
     const actions = $('<div>').addClass('actions');
     const copyIcon = $('<div>').addClass('icon copy').attr('title', 'Copy color code');
-    const swatchIcon = $('<div>').addClass('icon swatch').attr('title', 'Display swatch');;
+    const swatchIcon = $('<div>').addClass('icon swatch').attr('title', 'Toggle swatch');;
     actions.append(copyIcon);
     actions.append(swatchIcon);
     line.append(actions);
@@ -66,6 +66,30 @@ function copyClickHandler(event) {
   const feedback = $('<span>').addClass('feedback').text('copied');
   feedback.insertAfter(colorLabel);
   feedback.fadeOut(800, () => { feedback.remove(); });
+}
+
+const currentSwatches = {};
+function swatchClickHandler(event) {
+  const colorLabel = $(this).closest('.color-line').find('.color-label');
+  const colorCode = colorLabel.text();
+  if (colorCode in currentSwatches) {
+    delete currentSwatches[colorCode];
+    $(this).removeClass('active');
+  } else {
+    currentSwatches[colorCode] = true;
+    $(this).addClass('active');
+  }
+  renderSwatches(currentSwatches);
+}
+
+function renderSwatches(currentSwatches) {
+  const container = $('#swatch-container');
+  container.empty();
+  Object.keys(currentSwatches).forEach((color) => {
+    const swatch = $('<div>').addClass('swatch');
+    swatch.css('background-color', color);
+    swatch.appendTo(container);
+  });
 }
 
 const _d = 20; // round color channels to this integer
@@ -141,7 +165,7 @@ $(document).ready(function() {
   $('#fileInput').on('change', handleImageSelect);
   $('#runButton').on('click', processImageData);
 
-  const dropZone = $('#drop_zone');
+  const dropZone = $('#drop-zone');
   dropZone.on('dragenter', () => { console.log('ENTER'); });
   dropZone.on('dragleave', () => { console.log('LEAVE'); });
   // we need to cancel dragover to make drop fire... https://stackoverflow.com/q/19223352/4083826
@@ -151,4 +175,5 @@ $(document).ready(function() {
 
   // delegated event handlers for color line actions
   $('#sidebar').on('click', '.icon.copy', copyClickHandler);
+  $('#sidebar').on('click', '.icon.swatch', swatchClickHandler);
 });
