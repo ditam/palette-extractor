@@ -123,6 +123,9 @@ input[type="file"] {
   padding-left: 15px;
   color: white;
   opacity: 0;
+  text-transform: uppercase;
+  font-family: monospace;
+  font-size: 18px;
 }
 
 .color-label:hover {

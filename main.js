@@ -1,4 +1,5 @@
 
+// VGA, baby!
 const WIDTH = 640;
 const HEIGHT = 480;
 
@@ -6,6 +7,20 @@ let ctx;
 
 function roundTo(number, roundTo) {
   return Math.round(number/roundTo)*roundTo;
+}
+
+// expects the '<r>,<g>,<b>' format that we use for indexing colorCounter
+function getHexColorsFromRGB(concatenatedRGBString) {
+  const colors = concatenatedRGBString.split(',');
+  let hexCode = '#';
+  colors.forEach(colorString => {
+    const color = parseInt(colorString, 10);
+    if (color < 16) {
+      hexCode += '0';
+    }
+    hexCode += color.toString(16);
+  });
+  return hexCode;
 }
 
 function showTopColors(counter) {
@@ -23,7 +38,7 @@ function showTopColors(counter) {
       'background-color': 'rgb(' + color[0] + ')'
     });
     line.append(sample);
-    const label = $('<span>').text(`rgb(${color[0]})`).addClass('color-label')
+    const label = $('<span>').text(getHexColorsFromRGB(color[0])).addClass('color-label')
     line.append(label);
 
     // percentage visualization
@@ -112,7 +127,7 @@ $(document).ready(function() {
   const dropZone = $('#drop_zone');
   dropZone.on('dragenter', () => { console.log('ENTER'); });
   dropZone.on('dragleave', () => { console.log('LEAVE'); });
-  // you need to cancel dragover to make drag fire... https://stackoverflow.com/q/19223352/4083826
+  // we need to cancel dragover to make drop fire... https://stackoverflow.com/q/19223352/4083826
   dropZone.on('dragover', false);
   dropZone.on('drop', dropHandler);
   dropZone.on('click', () => { $('#fileInput').trigger('click'); });
