@@ -93,6 +93,11 @@ function renderSwatches(currentSwatches) {
   });
 }
 
+function clearSwatches() {
+  Object.keys(currentSwatches).forEach((key) => { delete currentSwatches[key]; });
+  renderSwatches(currentSwatches);
+}
+
 const _d = 20; // round color channels to this integer
 function processImageData() {
   console.log('processing...');
@@ -124,6 +129,7 @@ function drawImageFileToCanvas(file) {
       ctx.drawImage(img, 0, 0, WIDTH, HEIGHT);
       $('body').removeClass('empty');
       $('#results').empty();
+      clearSwatches();
     });
     img.src = evt.target.result;
   });
