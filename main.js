@@ -5,8 +5,9 @@ const HEIGHT = 480;
 
 let ctx;
 
-function roundTo(number, roundTo) {
-  return Math.round(number/roundTo)*roundTo;
+function roundRGB(number, roundTo) {
+  const rounded = Math.round(number/roundTo)*roundTo;
+  return Math.min(255, rounded);
 }
 
 // expects the '<r>,<g>,<b>' format that we use for indexing colorCounter
@@ -104,7 +105,7 @@ function processImageData() {
     const green = data[i + 1] = data[i + 1];
     const blue = data[i + 2] = data[i + 2];
     // NB: we ignore alpha values
-    const colorKey = roundTo(red, _d) + ',' + roundTo(green, _d) + ',' + roundTo(blue, _d);
+    const colorKey = roundRGB(red, _d) + ',' + roundRGB(green, _d) + ',' + roundRGB(blue, _d);
 
     if (!(colorKey in colorCounter)) {
       colorCounter[colorKey] = 0;
