@@ -41,6 +41,14 @@ function showTopColors(counter) {
     const label = $('<span>').text(getHexColorsFromRGB(color[0])).addClass('color-label')
     line.append(label);
 
+    // action icons
+    const actions = $('<div>').addClass('actions');
+    const copyIcon = $('<div>').addClass('icon copy').attr('title', 'Copy color code');
+    const swatchIcon = $('<div>').addClass('icon swatch').attr('title', 'Display swatch');;
+    actions.append(copyIcon);
+    actions.append(swatchIcon);
+    line.append(actions);
+
     // percentage visualization
     const percentBar = $('<span>').addClass('color-percent-container');
     const percentValue = $('<span>').addClass('color-percent-bar').css('width', percentOfTop + '%');
@@ -49,6 +57,15 @@ function showTopColors(counter) {
 
     line.appendTo(resultsContainer);
   }
+}
+
+function copyClickHandler(event) {
+  const colorLabel = $(this).closest('.color-line').find('.color-label');
+  const colorCode = colorLabel.text();
+  navigator.clipboard.writeText(colorCode);
+  const feedback = $('<span>').addClass('feedback').text('copied');
+  feedback.insertAfter(colorLabel);
+  feedback.fadeOut(800, () => { feedback.remove(); });
 }
 
 const _d = 20; // round color channels to this integer
@@ -131,4 +148,7 @@ $(document).ready(function() {
   dropZone.on('dragover', false);
   dropZone.on('drop', dropHandler);
   dropZone.on('click', () => { $('#fileInput').trigger('click'); });
+
+  // delegated event handlers for color line actions
+  $('#sidebar').on('click', '.icon.copy', copyClickHandler);
 });

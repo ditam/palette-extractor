@@ -115,6 +115,58 @@ input[type="file"] {
   padding-bottom: 0;
 }
 
+.color-line .actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 14px;
+}
+
+.color-line .actions .icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  padding-right: 15px;
+  color: white;
+  opacity: 0.5;
+  cursor: pointer;
+  background-repeat: no-repeat;
+
+  /* NB: the SVG icon source files are black */
+  filter: invert(1);
+}
+
+.color-line:not(:hover) .actions .icon {
+  display: none;
+}
+
+.color-line .actions .icon:hover {
+  opacity: 0.8;
+}
+
+.color-line .actions .icon.copy {
+  background-image: url('ext/icons/copy.svg');
+}
+
+.color-line .actions .icon.swatch {
+  background-image: url('ext/icons/ribbon-empty.svg');
+}
+
+.color-line .actions .icon.swatch.active {
+  display: inline-block;
+  background-image: url('ext/icons/ribbon-solid.svg');
+}
+
+.color-line .feedback {
+  position: absolute;
+  top: 19px;
+  left: 45%;
+  font-family: monospace;
+  color: white;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
 .color-label {
   position: absolute;
   width: 100%;
@@ -128,7 +180,11 @@ input[type="file"] {
   font-size: 18px;
 }
 
-.color-label:hover {
+.color-line:not(:hover) .color-label {
+  opacity: 0;
+}
+
+.color-line:hover .color-label {
   opacity: 0.6;
 }
 
